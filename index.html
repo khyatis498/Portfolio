@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Khyati Shah (PT) — Physiotherapist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --sage: #7a9e87;
+    --deep-sage: #4a6b55;
+    --terracotta: #c17f5a;
+    --charcoal: #2a2a2a;
+    --mid-gray: #6b6b6b;
+    --light-gray: #e8e4dc;
+    --gold: #c9a96e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* FREE CONSULTATION BANNER */
+  .free-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: linear-gradient(90deg, var(--deep-sage), var(--sage));
+    color: white; text-align: center;
+    padding: 0.6rem 2rem;
+    font-size: 0.85rem; letter-spacing: 0.02em;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .free-banner strong { font-weight: 600; }
+  .free-banner-link {
+    background: white; color: var(--deep-sage);
+    padding: 0.25rem 0.9rem; border-radius: 2rem;
+    font-size: 0.78rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .free-banner-link:hover { background: var(--gold); color: white; }
+
+  .free-consult-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, var(--terracotta), #d4956b);
+    color: white; padding: 0.45rem 1.2rem;
+    border-radius: 2rem; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.06em;
+    margin-bottom: 1.5rem; width: fit-content;
+    box-shadow: 0 4px 16px rgba(193,127,90,0.35);
+    animation: pulse-badge 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 4px 16px rgba(193,127,90,0.35); }
+    50% { box-shadow: 0 4px 24px rgba(193,127,90,0.6); }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 36px; width: 100%; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--deep-sage); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--mid-gray); transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--deep-sage); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 116px;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,158,135,0.12) 0%, transparent 70%);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 4rem 6rem;
+    position: relative; z-index: 1;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sage); font-weight: 500;
+    border: 1px solid var(--sage); padding: 0.35rem 1rem;
+    border-radius: 2rem; margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--charcoal); margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--deep-sage); font-style: italic; }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; color: var(--terracotta);
+    margin-bottom: 1.5rem; letter-spacing: 0.05em;
+  }
+  .hero-desc {
+    font-size: 0.95rem; line-height: 1.85; color: var(--mid-gray);
+    max-width: 440px; margin-bottom: 3rem;
+  }
+  .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--deep-sage); color: white;
+    padding: 0.85rem 2.2rem; border: none; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--deep-sage);
+    padding: 0.85rem 2.2rem; border: 1.5px solid var(--deep-sage);
+    border-radius: 4px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--deep-sage); color: white; }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 6rem 4rem 4rem 2rem; position: relative;
+  }
+  .hero-card {
+    background: white; border-radius: 16px;
+    padding: 2.5rem; max-width: 340px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--sage), var(--gold));
+    z-index: -1;
+  }
+  .hero-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage), var(--deep-sage));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: white; font-weight: 400;
+  }
+  .hero-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; margin-bottom: 0.3rem;
+  }
+  .hero-card p { font-size: 0.82rem; color: var(--mid-gray); margin-bottom: 1.5rem; }
+  .stat-row { display: flex; gap: 1.5rem; border-top: 1px solid var(--light-gray); padding-top: 1.5rem; }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--deep-sage); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.05em; margin-top: 0.2rem; }
+  .specialties { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+  .spec-tag {
+    background: var(--cream); border: 1px solid var(--light-gray);
+    padding: 0.3rem 0.8rem; border-radius: 2rem;
+    font-size: 0.72rem; color: var(--deep-sage); letter-spacing: 0.04em;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 6rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+  .section-label {
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--sage); font-weight: 500; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 60px;
+    height: 1px; background: var(--sage);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300; line-height: 1.2; color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+  .section-subtitle { font-size: 0.95rem; color: var(--mid-gray); line-height: 1.8; max-width: 580px; }
+
+  /* ABOUT */
+  .about { background: white; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+  .about-left { position: relative; }
+  .about-img-box {
+    background: var(--cream); border-radius: 12px;
+    padding: 3rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .about-img-box::before {
+    content: '';
+    position: absolute; bottom: -40px; right: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(122,158,135,0.1);
+  }
+  .big-initial {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem; font-weight: 600; line-height: 1;
+    color: var(--sage); opacity: 0.3;
+  }
+  .about-img-label {
+    position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: var(--deep-sage); color: white;
+    padding: 0.5rem 1.5rem; border-radius: 2rem;
+    font-size: 0.78rem; letter-spacing: 0.1em; white-space: nowrap;
+  }
+  .about-details { margin-top: 2rem; }
+  .detail-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 0; border-bottom: 1px solid var(--light-gray);
+    font-size: 0.88rem;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-icon { width: 32px; height: 32px; background: var(--cream); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .detail-label { font-weight: 500; color: var(--charcoal); }
+  .detail-val { color: var(--mid-gray); font-size: 0.82rem; }
+
+  /* SKILLS GRID */
+  .skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .skill-card {
+    background: white; border-radius: 12px; padding: 2rem;
+    border: 1px solid transparent;
+    transition: all 0.35s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--gold));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .skill-card:hover { border-color: var(--light-gray); box-shadow: 0 12px 40px rgba(0,0,0,0.07); transform: translateY(-4px); }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .skill-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .skill-desc { font-size: 0.82rem; color: var(--mid-gray); line-height: 1.7; }
+
+  /* EXPERIENCE */
+  .experience { background: white; }
+  .exp-timeline { margin-top: 3rem; position: relative; }
+  .exp-timeline::before {
+    content: ''; position: absolute; left: 180px; top: 0; bottom: 0;
+    width: 1px; background: var(--light-gray);
+  }
+  .exp-item { display: grid; grid-template-columns: 180px 1fr; gap: 3rem; margin-bottom: 3.5rem; position: relative; }
+  .exp-date {
+    text-align: right; padding-top: 0.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 300;
+    color: var(--mid-gray); letter-spacing: 0.03em;
+  }
+  .exp-dot {
+    position: absolute; left: 172px; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--sage); border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--sage);
+  }
+  .exp-content { padding-left: 2rem; }
+  .exp-role { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .exp-org { font-size: 0.85rem; color: var(--terracotta); letter-spacing: 0.05em; margin-bottom: 1rem; font-weight: 500; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.88rem; color: var(--mid-gray); line-height: 1.75;
+    padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem;
+  }
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0; color: var(--sage); font-size: 0.85rem;
+  }
+
+  /* EDUCATION */
+  .education { background: var(--cream); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .edu-card {
+    background: white; border-radius: 12px; padding: 2rem;
+    border-left: 4px solid var(--sage); transition: all 0.3s;
+  }
+  .edu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .edu-school { font-size: 0.82rem; color: var(--terracotta); font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+  .edu-year { font-size: 0.78rem; color: var(--mid-gray); margin-bottom: 0.8rem; }
+  .edu-score {
+    display: inline-block;
+    background: var(--cream); border: 1px solid var(--light-gray);
+    padding: 0.3rem 0.8rem; border-radius: 2rem;
+    font-size: 0.78rem; color: var(--deep-sage); font-weight: 500;
+  }
+
+  /* CERTIFICATIONS */
+  .certifications { background: white; }
+  .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .cert-card {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    background: var(--cream); border-radius: 12px; padding: 1.8rem;
+    border: 1px solid transparent; transition: all 0.3s;
+  }
+  .cert-card:hover { border-color: var(--sage); background: white; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+  .cert-badge {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--deep-sage); display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .cert-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .cert-date { font-size: 0.8rem; color: var(--mid-gray); }
+  .cert-org { font-size: 0.8rem; color: var(--terracotta); font-weight: 500; margin-top: 0.2rem; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--deep-sage); padding: 6rem 0; }
+  .testimonials .section-label { color: var(--gold); }
+  .testimonials .section-label::after { background: var(--gold); }
+  .testimonials .section-title { color: white; }
+  .testimonials .section-subtitle { color: rgba(255,255,255,0.6); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 2.2rem;
+    transition: all 0.35s;
+    backdrop-filter: blur(10px);
+  }
+  .testi-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; line-height: 0.8; color: var(--gold); opacity: 0.6;
+    margin-bottom: 0.5rem;
+  }
+  .testi-text {
+    font-size: 0.92rem; color: rgba(255,255,255,0.85); line-height: 1.85;
+    margin-bottom: 1.5rem; font-style: italic;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
+  }
+  .testi-divider { height: 1px; background: rgba(255,255,255,0.12); margin-bottom: 1.2rem; }
+  .testi-person { display: flex; align-items: center; gap: 1rem; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    font-weight: 600; color: white;
+    background: linear-gradient(135deg, var(--sage), var(--gold));
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 500; color: white; font-size: 0.9rem; }
+  .testi-condition { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem; }
+  .testi-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+
+  /* CONTACT */
+  .contact { background: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; margin-top: 3rem; align-items: start; }
+  .contact-info { }
+  .contact-item {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--light-gray);
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-icon {
+    width: 44px; height: 44px; background: white; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 0.3rem; }
+  .contact-val { font-size: 0.95rem; color: var(--charcoal); font-weight: 400; }
+  .contact-form { background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label { display: block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 0.6rem; }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 0.85rem 1rem;
+    border: 1.5px solid var(--light-gray); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    background: var(--warm-white); color: var(--charcoal);
+    transition: border-color 0.3s; outline: none; resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--sage); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal); color: rgba(255,255,255,0.5);
+    padding: 3rem 0; text-align: center;
+  }
+  footer .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: white; margin-bottom: 1rem; }
+  footer p { font-size: 0.82rem; }
+  footer span { color: var(--sage); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+  .hero-right { animation: fadeUp 0.8s 0.5s ease both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { padding: 2rem; }
+    .container { padding: 0 2rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .edu-grid { grid-template-columns: 1fr 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .exp-timeline::before { left: 0; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-date { text-align: left; }
+    .exp-dot { display: none; }
+    .exp-content { padding-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Dr. Khyati Shah (PT)</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- FREE CONSULTATION BANNER -->
+<div class="free-banner">
+  🎉 <strong>First Consultation is FREE</strong> — Book your appointment today and take the first step towards recovery!
+  <a href="#contact" class="free-banner-link">Book Now →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Physiotherapist · Vadodara, India</div>
+    <h1 class="hero-name">Dr. Khyati<br><span>Shah</span></h1>
+    <p class="hero-title">BPT · Expert in Neuro & Orthopedic Rehabilitation</p>
+    <p class="hero-desc">Dedicated physiotherapist with 4+ years of clinical experience helping patients regain mobility, manage pain, and restore quality of life through evidence-based rehabilitation.</p>
+    <div class="free-consult-badge">✦ First Consultation Free</div>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-primary">Book Free Consultation</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-avatar">KS</div>
+      <h3>Dr. Khyati Shah</h3>
+      <p>Physiotherapist · Zainee Hospital, Vadodara</p>
+      <div class="specialties">
+        <span class="spec-tag">Neuro Rehab</span>
+        <span class="spec-tag">Ortho</span>
+        <span class="spec-tag">Geriatric</span>
+        <span class="spec-tag">Dry Needling</span>
+        <span class="spec-tag">Manual Therapy</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Yrs. Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Patients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="about-img-box">
+          <div class="big-initial">KS</div>
+          <div class="about-img-label">BPT · MS University Vadodara</div>
+        </div>
+        <div class="about-details">
+          <div class="detail-row">
+            <div class="detail-icon">📞</div>
+            <div>
+              <div class="detail-label">Phone</div>
+              <div class="detail-val">+91 9427547848 · +91 7984885094</div>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-icon">✉️</div>
+            <div>
+              <div class="detail-label">Email</div>
+              <div class="detail-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0dbd8c9d1c4d9c3848988f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</a></div>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-icon">📍</div>
+            <div>
+              <div class="detail-label">Location</div>
+              <div class="detail-val">Vadodara, Gujarat, India</div>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-icon">🌐</div>
+            <div>
+              <div class="detail-label">Languages</div>
+              <div class="detail-val">English · Hindi · Gujarati</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Healing Through Movement & Care</h2>
+        <p class="section-subtitle">I am a dedicated physiotherapist passionate about restoring function and improving quality of life. With clinical training across neurological, orthopedic, geriatric, and cardiothoracic domains, I bring a holistic, evidence-based approach to each patient.</p>
+        <br>
+        <p class="section-subtitle">My journey began at SSG Hospital under The Maharaja Sayajirao University, where I developed strong foundations across multiple rehabilitation disciplines. I now serve as a Consultant Physiotherapist at Zainee Hospital, Vadodara, specializing in neuro rehabilitation — helping patients with stroke, Parkinsonism, and ataxia regain independence and dignity.</p>
+        <br>
+        <p class="section-subtitle">Beyond clinical work, I continuously invest in advanced skills — from Dry Needling to Manual Therapy and IASTM — to deliver the most effective, modern care possible.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="section-label">Core Competencies</div>
+    <h2 class="section-title">Clinical Skills & Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-name">Manual Therapy</div>
+        <div class="skill-desc">Hands-on mobilization and manipulation techniques to restore joint mobility and reduce pain. Certified by CAPRI Institute.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Electrotherapy</div>
+        <div class="skill-desc">Proficient in IFT, TENS, and Ultrasound Therapy modalities for pain management and accelerated tissue recovery.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Neurological Rehabilitation</div>
+        <div class="skill-desc">Specialized treatment of stroke, Parkinsonism, ataxia, and other neurological conditions to restore functional movement.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Exercise Therapy</div>
+        <div class="skill-desc">Individualized strengthening, stretching, and mobility programs tailored to each patient's recovery goals.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Pediatric Physiotherapy</div>
+        <div class="skill-desc">Neuro-pediatric rehabilitation supporting children's motor development and functional recovery.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Dry Needling</div>
+        <div class="skill-desc">Certified dry needling practitioner targeting myofascial trigger points for effective pain relief and muscle recovery.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Orthopedic Rehabilitation</div>
+        <div class="skill-desc">Treatment of musculoskeletal injuries, post-surgical recovery, and chronic orthopedic conditions.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">Geriatric Physiotherapy</div>
+        <div class="skill-desc">Age-specific rehabilitation addressing mobility issues, fall prevention, and quality of life for elderly patients.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-name">IASTM</div>
+        <div class="skill-desc">Instrument Assisted Soft Tissue Mobilization to address fascial restrictions and chronic soft tissue dysfunction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="section-label">Work History</div>
+    <h2 class="section-title">Career Journey</h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-date">2022 – Present</div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-role">Consultant Physiotherapist</div>
+          <div class="exp-org">🏥 Zainee Hospital, Vadodara</div>
+          <ul class="exp-bullets">
+            <li>Assess and treat patients with neurological conditions including stroke, Parkinsonism, and ataxia.</li>
+            <li>Develop personalized rehabilitation and exercise therapy plans to improve patient mobility and functional recovery.</li>
+            <li>Collaborate with interdisciplinary medical teams to optimize patient recovery outcomes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Aug 2021 – Aug 2023</div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-role">Physiotherapist</div>
+          <div class="exp-org">🏥 Sanjivani Physiotherapy & Rehabilitation Center, Vadodara</div>
+          <ul class="exp-bullets">
+            <li>Treated patients with orthopedic injuries, neurological disorders, and age-related mobility issues.</li>
+            <li>Designed rehabilitation programs including strengthening, stretching, and mobility exercises.</li>
+            <li>Utilized electrotherapy modalities — IFT, TENS, and ultrasound — for pain relief and recovery.</li>
+            <li>Assisted patients with post-surgical rehabilitation and functional movement restoration.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">2020 (6 Months)</div>
+        <div class="exp-dot"></div>
+        <div class="exp-content">
+          <div class="exp-role">Physiotherapy Intern</div>
+          <div class="exp-org">🏥 SSG Hospital, Vadodara</div>
+          <ul class="exp-bullets">
+            <li>Clinical training across Neuro-Pediatric Rehabilitation, Electrotherapy Unit, Orthopedic Rehabilitation, Geriatric Physiotherapy, and Cardiothoracic Physiotherapy.</li>
+            <li>Conducted supervised patient assessments and assisted with treatment sessions.</li>
+            <li>Developed and implemented rehabilitation plans under senior supervision.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">2020</div>
+        <div class="exp-dot" style="background: var(--terracotta); box-shadow: 0 0 0 2px var(--terracotta);"></div>
+        <div class="exp-content">
+          <div class="exp-role">COVID-19 Healthcare Assistant</div>
+          <div class="exp-org">🏥 SSG Hospital, Vadodara</div>
+          <ul class="exp-bullets">
+            <li>Supported healthcare teams in patient care during the COVID-19 pandemic.</li>
+            <li>Assisted with patient monitoring, mobility support, and rehabilitation guidance.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CERTIFICATIONS -->
+<section class="certifications" id="certifications">
+  <div class="container">
+    <div class="section-label">Courses & Certifications</div>
+    <h2 class="section-title">Professional Development</h2>
+    <p class="section-subtitle">Committed to continuous learning and advancing clinical expertise through specialized certifications and workshops.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-badge">🖐️</div>
+        <div>
+          <div class="cert-name">Manual Therapy Certification</div>
+          <div class="cert-org">CAPRI Institute</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">💉</div>
+        <div>
+          <div class="cert-name">Dry Needling Certification</div>
+          <div class="cert-org">Professional Certification</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">⚕️</div>
+        <div>
+          <div class="cert-name">IASTM Workshop</div>
+          <div class="cert-org">Instrument Assisted Soft Tissue Mobilization</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🩺</div>
+        <div>
+          <div class="cert-name">Physiotherapy Conference</div>
+          <div class="cert-org">AIIMS Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label">Patient Reviews</div>
+    <h2 class="section-title">What My Patients Say</h2>
+    <p class="section-subtitle">Real stories from patients whose lives have been positively transformed through dedicated physiotherapy care.</p>
+    <div class="testimonials-grid" style="grid-template-columns: 1fr; max-width: 600px;">
+
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">મને પગની ઘૂંટીમાં મચકોડ આવી હતી, અને ડૉ. ખ્યાતિએ સારવાર આપી જેની અસર થોડા સમયમાં જ દેખાઈ અને હું ફરીથી દોડી શક્યો.</p>
+        <div class="testi-divider"></div>
+        <div class="testi-person">
+          <div class="testi-avatar">VP</div>
+          <div>
+            <div class="testi-name">Vedant Parikh</div>
+            <div class="testi-condition">Ankle Sprain Recovery</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Book a Consultation</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-subtitle" style="margin-bottom: 2.5rem;">Ready to start your recovery journey? Reach out for an appointment or any queries about physiotherapy services.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val">+91 9427547848</div>
+            <div class="contact-val">+91 7984885094</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f69d9e8f97829f85c2cfceb6919b979f9ad895999b">[email&#160;protected]</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">Zainee Hospital, Vadodara</div>
+            <div class="contact-val" style="font-size: 0.82rem; color: var(--mid-gray);">Gujarat, India</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Availability</div>
+            <div class="contact-val">Mon – Sat: On-call & Appointment</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 1.8rem;">Send a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Rahul">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label>Condition / Concern</label>
+          <input type="text" id="condition" placeholder="e.g. Back pain, post-surgery recovery...">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="4" id="message" placeholder="Tell Dr. Khyati about your condition and what you're looking for..."></textarea>
+        </div>
+        <button class="btn-primary" style="width: 100%; text-align: center;" onclick="sendEmail()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo logo">Dr. Khyati Shah (PT)</div>
+  <p>Bachelor of Physiotherapy · Vadodara, India</p>
+  <p style="margin-top: 0.5rem;">Healing through <span>movement</span>, science &amp; <span>compassion</span></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function sendEmail() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const condition = document.getElementById('condition').value.trim();
+    const message   = document.getElementById('message').value.trim();
+
+    if (!firstName || !message) {
+      alert('Please enter at least your first name and a message.');
+      return;
+    }
+
+    const subject = encodeURIComponent('Physiotherapy Consultation Request – ' + firstName + ' ' + lastName);
+    const body = encodeUR
